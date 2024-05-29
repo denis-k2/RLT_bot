@@ -61,7 +61,8 @@ def process_query(message: str):
         group_type = msg["group_type"]
         pipeline = build_pipeline(dt_from, dt_upto, group_type)
         response_mongo = client.aggregate(pipeline)
-        return list(response_mongo)[0]
+        result = json.dumps(list(response_mongo)[0])
+        return result
     except Exception:
         return (
             'Невалидный запос. Пример запроса:\n{"dt_from": "2022-09-01T00:00:00", '
